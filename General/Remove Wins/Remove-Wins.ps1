@@ -6,7 +6,7 @@ $NETBios = Get-WmiObject -ComputerName $comp -Class Win32_NetworkAdapterConfigur
 foreach($net in $NETBios){
 Write-Warning "WINS currently set to $($net.WINSPrimaryServer) on $comp"
 Write-Warning "Removing WINS and Disabling NetBios on Interface $($net.InterfaceIndex) with IP:$($net.IPAddress)"
-$NETBios.SetWINSServer("$Null","$Null") | Out-Null
-$NETBios.SetTcpipNetbios("2") | Out-Null
+$net.SetWINSServer("$Null","$Null") | Out-Null
+$net.SetTcpipNetbios("2") | Out-Null
 }
 }
